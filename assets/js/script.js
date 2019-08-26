@@ -38,8 +38,7 @@ $(document).ready(function () {
 });
 
 function DeleteUser(id) {
-    var conf = confirm("Apakah benar, kamu ingin menghapus user ini?");
-    if ( conf == true) {
+
         $.post("extend.php?aksi=delete", {
                 id: id
             }, function (data, status) {
@@ -49,7 +48,6 @@ function DeleteUser(id) {
                 sweet('Dihapus');
             }
         );
-    }
 }
  
 function GetUserDetails(id) {
@@ -105,4 +103,24 @@ function sweet(ad) {
         'Data Berhasil '+ ad,
         'success'
       )
+}
+function del(id) {
+    Swal.fire({
+        title: 'Apakah kamu yakin?',
+        text: "Kamu ingin menghapus data ini!",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Ya, Hapus Data Ini!'
+      }).then((result) => {
+        if (result.value) {
+          Swal.fire(
+            DeleteUser(id)
+            // 'Deleted!',
+            // 'Your file has been deleted.',
+            // 'success'
+          )
+        }
+      })
 }

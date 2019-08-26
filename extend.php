@@ -63,7 +63,7 @@
                             <button onclick="GetUserDetails('.$row['id'].')" class="btn btn-warning">Update</button>
                         </td>
                         <td>
-                            <button onclick="DeleteUser('.$row['id'].')" class="btn btn-danger">Delete</button>
+                            <button onclick="del('.$row['id'].')" class="btn btn-danger">Delete</button>
                         </td>
                     </tr>';
                     $number++;
