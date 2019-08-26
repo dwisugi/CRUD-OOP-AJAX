@@ -1,29 +1,29 @@
-//add record
+//menambahkan record
 function addRecord() {
     //get values
     var nama_motor = $('#nama_motor').val();
     var merk_motor = $('#merk_motor').val();
     var harga_motor = $('#harga_motor').val();
 
-    //addrecord
+    //membuat record
     $.post('extend.php?aksi=create', {
         nama_motor: nama_motor,
         merk_motor: merk_motor,
         harga_motor: harga_motor
     }, function (data, status) {
-        //close records again
+        //menutup modal record
         $('#add_new_record_modal').modal('hide');
-        //read record again
+        //membaca record
         readRecords();
         sweet('Ditambahkan');
-        //clear fields from the popup
+        //untuk mmbersihkan isi form di modal
         $('#nama_motor').val('');
         $('#merk_motor').val('');
         $('#harga_motor').val('');
     });
 }
 
-//read records
+//untuk melihat record
 function readRecords(){
     $.get('extend.php?aksi=read',{
 
@@ -33,8 +33,8 @@ function readRecords(){
 }
 
 $(document).ready(function () {
-    // READ recods on page load
-    readRecords(); // calling function
+    // menampilkan record saat semua  fungsi sudah siap
+    readRecords(); // memanggil function
 });
 
 function DeleteUser(id) {
@@ -43,44 +43,45 @@ function DeleteUser(id) {
         $.post("extend.php?aksi=delete", {
                 id: id
             }, function (data, status) {
-                // reload Users by using readRecords();
+                // reload User by using readRecords();
                 readRecords();
-                // sweet('Dihapus');
+                ///menampilkan popup berhasil dihapus
+                sweet('Dihapus');
             }
         );
     }
 }
  
 function GetUserDetails(id) {
-    // Add User ID to the hidden field for furture usage    
+    // menambahkan id ke hidden user untuk digunakan nanti    
     $("#hidden_user_id").val(id);
 
     $.post("extend.php?aksi=update", {
             id: id
         }, function (data, status) {
-            // PARSE json data
+            // PARSE json data / mengambil data json
             var user = JSON.parse(data);
             
-            // Assing existing values to the modal popup fields
+            // mendapatkan data user dan menampilkannya di form edit
             $("#update_nama_motor").val(user.nama_motor);
             $("#update_merk_motor").val(user.merk_motor);
             $("#update_harga_motor").val(user.harga_motor);
         } 
     );
-    // Open modal popup
+    // menampilkan modal popup
     $("#update_user_modal").modal("show");
 }
   
 function UpdateUserDetails() {
-    // get values
+    // mendapatkan nilai yang akan diedit
     var nama_motor = $("#update_nama_motor").val();
     var merk_motor = $("#update_merk_motor").val();
     var harga_motor = $("#update_harga_motor").val();
 
-    // get hidden field value
+    // mendapatkan nilai hidden user
     var id = $("#hidden_user_id").val();
 
-    // Update the details by requesting to the server using ajax | ajax/updateUserDetails.php
+    // Update data ke server menggunakan ajax 
     $.post("extend.php?aksi=proses", {
             id: id,
             nama_motor: nama_motor,
@@ -88,9 +89,9 @@ function UpdateUserDetails() {
             harga_motor: harga_motor
         },
         function (data, status) {
-            // hide modal popup
+            // mmenutup modal popup
             $("#update_user_modal").modal("hide");
-            // reload Users by using readRecords();
+            // menampilkan data menggunakan readRecords();
             readRecords();
             sweet('Diubah');
             
@@ -105,4 +106,3 @@ function sweet(ad) {
         'success'
       )
 }
-

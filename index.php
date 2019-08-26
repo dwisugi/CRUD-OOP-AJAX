@@ -23,7 +23,7 @@
                             <div class="modal-content">
                                 <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-                                <h4 class="modal-title" id="myModalLabel">Add New Motor</h4>
+                                <h4 class="modal-title" id="myModalLabel">Tambah Data Motor</h4>
                                 </div>
                                 <div class="modal-body">
                         
@@ -44,8 +44,8 @@
                         
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                                    <button type="button" class="btn btn-primary" onclick="addRecord()">Add Record</button>
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+                                    <button type="button" class="btn btn-primary" onclick="addRecord()">Tambah</button>
                                 </div>
                             </div>
                         </div>
@@ -57,7 +57,7 @@
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-                                    <h4 class="modal-title" id="myModalLabel">Update</h4>
+                                    <h4 class="modal-title" id="myModalLabel">Edit</h4>
                                 </div>
                                 <div class="modal-body">
  
@@ -78,8 +78,8 @@
 
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                                    <button type="button" class="btn btn-primary" onclick="UpdateUserDetails()" >Save Changes</button>
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+                                    <button type="button" class="btn btn-primary" onclick="UpdateUserDetails()" >Simpan Edit</button>
                                     <input type="hidden" id="hidden_user_id">
                                 </div>
                             </div>
