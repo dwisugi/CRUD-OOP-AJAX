@@ -23,18 +23,77 @@ function addRecord() {
     });
 }
 
+function addUser() {
+    //get values
+    var new_nama = $('#new_nama').val();
+    var new_email = $('#new_email').val();
+    var new_password = $('#new_password').val();
+
+    //membuat record
+    $.post('extend.php?aksi=adduser', {
+        nama: new_nama,
+        email: new_email,
+        password: new_password
+    }, function (data, status) {
+        //menutup modal record
+        $('#add_new_user').modal('hide');
+        //membaca record
+        readNoLog();
+        sweet('Ditambahkan');
+        //untuk mmbersihkan isi form di modal
+        $('#new_nama').val('');
+        $('#new_email').val('');
+        $('#new_password').val('');
+
+    })
+}
+function login() {
+    //get values
+    // var nama = $('#nama').val();
+    var email = $('#email').val();
+    var password = $('#password').val();
+
+    //membuat record
+    $.post('extend.php?aksi=login', {
+        // nama: nama,
+        email: email,
+        password: password
+    }, function (data, status) {
+        //menutup modal record
+        $('#login').modal('hide');
+        //membaca record
+        location.href = "index.php";
+        // readRecords();
+        // sweet('Ditambahkan');
+        //untuk mmbersihkan isi form di modal
+        // $('#nama').val('');
+        $('#email').val('');
+        $('#password').val('');
+
+    })
+}
 //untuk melihat record
 function readRecords(){
+        $.get('extend.php?aksi=readlogin',{
+
+        }, function (data, status) {
+                $('.records_content').html(data);
+        });
+    }
+
+function readNoLog(){
     $.get('extend.php?aksi=read',{
 
     }, function (data, status) {
-            $('.records_content').html(data);
+            $('.no_records_content').html(data);
     });
 }
+
 
 $(document).ready(function () {
     // menampilkan record saat semua  fungsi sudah siap
     readRecords(); // memanggil function
+    readNoLog();
 });
 
 function DeleteUser(id) {
@@ -97,12 +156,28 @@ function UpdateUserDetails() {
     );
 }
 
+function logout() {
+    $.get('extend.php?aksi=logout',{
+
+    }, function (data, status) {
+        location.href = "index.php";
+            // $('.no_records_content').html(data);
+    });
+}
+
 function sweet(ad) {
     Swal.fire(
         'Berhasil!',
         'Data Berhasil '+ ad,
         'success'
       )
+}
+function gagal() {
+    Swal.fire({
+        type: 'error',
+        title: 'Oops...',
+        text: 'Password Atau Sandi Mungkin Salah!'
+      })
 }
 function del(id) {
     Swal.fire({
@@ -117,6 +192,26 @@ function del(id) {
         if (result.value) {
           Swal.fire(
             DeleteUser(id)
+            // 'Deleted!',
+            // 'Your file has been deleted.',
+            // 'success'
+          )
+        }
+      })
+}
+function log() {
+    Swal.fire({
+        title: 'Apakah kamu yakin?',
+        text: "Kamu Ingin Keluar!",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Ya, Keluar!'
+      }).then((result) => {
+        if (result.value) {
+          Swal.fire(
+            logout()
             // 'Deleted!',
             // 'Your file has been deleted.',
             // 'success'
